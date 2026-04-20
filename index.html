@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deep K — Robotics & Autonomous Systems</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f1e35;
+    --navy-mid: #1a2f4a;
+    --navy-light: #243d5e;
+    --gold: #c9963a;
+    --gold-light: #e8b862;
+    --cream: #f5f1ea;
+    --cream-dark: #ede8df;
+    --text: #1a1a2e;
+    --text-mid: #3d4560;
+    --text-light: #6b7494;
+    --white: #ffffff;
+    --border: rgba(15,30,53,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(245,241,234,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.2rem; font-weight: 500;
+    color: var(--navy); letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem; font-weight: 400; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-mid);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--navy); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 60px;
+  }
+  .hero-left {
+    background: var(--navy);
+    padding: 5rem 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .hero-left::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    border: 1px solid rgba(201,150,58,0.2);
+    border-radius: 50%;
+  }
+  .hero-left::after {
+    content: '';
+    position: absolute; bottom: -60px; left: -60px;
+    width: 250px; height: 250px;
+    border: 1px solid rgba(201,150,58,0.12);
+    border-radius: 50%;
+  }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; font-weight: 300; letter-spacing: 0.15em;
+    color: var(--gold); text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.6s 0.2s forwards;
+  }
+  .hero-name {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 500; line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.6s 0.35s forwards;
+  }
+  .hero-name em { color: var(--gold-light); font-style: italic; }
+  .hero-desc {
+    font-size: 1rem; font-weight: 300; line-height: 1.75;
+    color: rgba(255,255,255,0.7);
+    max-width: 420px;
+    margin-bottom: 2.5rem;
+    opacity: 0; animation: fadeUp 0.6s 0.5s forwards;
+  }
+  .hero-links {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.6s 0.65s forwards;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--gold); color: var(--navy);
+    padding: 0.7rem 1.5rem; border-radius: 3px;
+    font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.85);
+    padding: 0.7rem 1.5rem; border-radius: 3px;
+    font-size: 0.82rem; font-weight: 400; letter-spacing: 0.06em;
+    text-transform: uppercase; text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.05); }
+
+  .hero-right {
+    background: var(--cream-dark);
+    padding: 5rem 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+    border-left: 1px solid var(--border);
+  }
+  .info-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-light); margin-bottom: 2rem;
+  }
+  .info-block { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+  .info-block:last-child { border-bottom: none; margin-bottom: 0; }
+  .info-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.15rem; font-weight: 500;
+    color: var(--navy); margin-bottom: 0.3rem;
+  }
+  .info-sub { font-size: 0.85rem; color: var(--text-mid); line-height: 1.5; }
+  .info-sub span {
+    display: inline-block;
+    background: var(--navy); color: var(--gold-light);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem; padding: 2px 8px; border-radius: 2px;
+    margin-top: 0.4rem;
+  }
+
+  /* SECTIONS */
+  section { padding: 5rem 0; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 500; color: var(--navy);
+    margin-bottom: 3rem; line-height: 1.2;
+  }
+
+  /* RESEARCH */
+  #research { background: var(--white); }
+  .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5px; background: var(--border); border: 1px solid var(--border); }
+  .research-card {
+    background: var(--white);
+    padding: 2rem 2.5rem;
+    transition: background 0.2s;
+  }
+  .research-card:hover { background: #faf8f5; }
+  .research-card-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.8rem;
+  }
+  .research-card h3 {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.25rem; font-weight: 500; color: var(--navy);
+    margin-bottom: 0.6rem; line-height: 1.3;
+  }
+  .research-card p { font-size: 0.88rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 1rem; }
+  .research-meta { font-size: 0.78rem; color: var(--text-light); }
+  .research-meta strong { color: var(--text-mid); font-weight: 500; }
+
+  /* PROJECTS */
+  #projects { background: var(--cream); }
+  .projects-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .project-row {
+    background: var(--cream);
+    display: grid; grid-template-columns: 80px 1fr auto;
+    align-items: start; gap: 2rem;
+    padding: 2rem 2.5rem;
+    transition: background 0.2s;
+    text-decoration: none; color: inherit;
+  }
+  .project-row:hover { background: var(--cream-dark); }
+  .project-num {
+    font-family: 'EB Garamond', serif;
+    font-size: 2.5rem; font-weight: 400;
+    color: var(--cream-dark); line-height: 1;
+    align-self: center;
+    filter: contrast(0.5);
+  }
+  .project-row:hover .project-num { color: var(--gold-light); filter: none; }
+  .project-info h3 {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.3rem; font-weight: 500; color: var(--navy);
+    margin-bottom: 0.4rem;
+  }
+  .project-info p { font-size: 0.87rem; color: var(--text-mid); line-height: 1.65; margin-bottom: 0.8rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; padding: 3px 8px;
+    border: 1px solid var(--border);
+    color: var(--text-mid); border-radius: 2px;
+    background: rgba(255,255,255,0.6);
+  }
+  .project-arrow {
+    font-size: 1.4rem; color: var(--text-light);
+    align-self: center; transition: transform 0.2s, color 0.2s;
+  }
+  .project-row:hover .project-arrow { transform: translate(3px,-3px); color: var(--gold); }
+
+  /* SKILLS */
+  #skills { background: var(--navy); }
+  #skills .section-title { color: var(--white); }
+  #skills .section-label { color: var(--gold-light); }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); }
+  .skill-block {
+    padding: 2rem;
+    background: var(--navy);
+  }
+  .skill-block-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .skill-item {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.45rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.85rem; color: rgba(255,255,255,0.75);
+  }
+  .skill-item:last-child { border-bottom: none; }
+  .skill-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+
+  /* CONTACT */
+  #contact { background: var(--cream-dark); }
+  .contact-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+  }
+  .contact-text h2 {
+    font-family: 'EB Garamond', serif;
+    font-size: 2rem; font-weight: 500; color: var(--navy);
+    margin-bottom: 1rem;
+  }
+  .contact-text p { font-size: 0.9rem; color: var(--text-mid); line-height: 1.8; margin-bottom: 1.5rem; }
+  .contact-details { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 3px;
+    font-size: 0.87rem; color: var(--text);
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+  .contact-item:hover { border-color: var(--gold); }
+  .contact-icon {
+    width: 32px; height: 32px;
+    background: var(--navy); border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+  }
+  .contact-item-text { display: flex; flex-direction: column; }
+  .contact-item-label { font-size: 0.68rem; color: var(--text-light); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 2px; }
+  .contact-item-val { font-weight: 500; color: var(--navy); }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    padding: 2rem;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; color: rgba(255,255,255,0.35);
+    letter-spacing: 0.08em;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-left, .hero-right { padding: 3rem 2rem; }
+    .research-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .project-row { grid-template-columns: 50px 1fr auto; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Deep K</div>
+  <ul class="nav-links">
+    <li><a href="#research">Research</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">M.S. Computer Engineering · CSUN</div>
+    <h1 class="hero-name">Robotics &<br><em>Autonomous</em><br>Systems</h1>
+    <p class="hero-desc">
+      Building systems where intelligence meets hardware — from vision-based humanoid robot controllers to LiDAR-driven autonomous navigation and embedded AI.
+    </p>
+    <div class="hero-links">
+      <a href="https://github.com/jaiswalnabin" target="_blank" class="btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="mailto:deep@gmail.com" class="btn-outline">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+        Get in Touch
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="info-label">Current Status</div>
+
+    <div class="info-block">
+      <div class="info-title">Research Assistant</div>
+      <div class="info-sub">
+        MOSAIC Lab, California State University, Northridge<br>
+        Humanoid robot control · Intelligent perception systems
+        <span>2026 – Present</span>
+      </div>
+    </div>
+
+    <div class="info-block">
+      <div class="info-title">M.S. Computer Engineering</div>
+      <div class="info-sub">
+        California State University, Northridge · GPA 3.6/4.0<br>
+        Thesis: Image-Based Control of Humanoid Robots via DNNs
+        <span>Graduated 2025</span>
+      </div>
+    </div>
+
+    <div class="info-block">
+      <div class="info-title">Research Interests</div>
+      <div class="info-sub">
+        Autonomous navigation · SLAM · Vision-based robot control · Embedded AI · Sensor fusion · Real-time systems
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="container">
+    <div class="section-label">Academic Work</div>
+    <div class="section-title">Research Experience</div>
+    <div class="research-grid">
+
+      <div class="research-card">
+        <div class="research-card-tag">Current · 2026–Present</div>
+        <h3>Humanoid Robot Control & Intelligent Perception</h3>
+        <p>Designing and implementing ML-based control algorithms for real-time humanoid robot movement. Integrating perception models for adaptive behavior in dynamic environments.</p>
+        <div class="research-meta">
+          <strong>MOSAIC Lab, CSUN</strong><br>
+          Advisor: Prof. Dr. Myung (Michael) Cho
+        </div>
+      </div>
+
+      <div class="research-card">
+        <div class="research-card-tag">Active · 2025–Present</div>
+        <h3>LiDAR-Based Autonomous Navigation & SLAM</h3>
+        <p>Collaborative research developing EKF-SLAM and GraphSLAM for real-time 2D mapping and autonomous navigation on a TI-RSLK platform with RPLiDAR C1.</p>
+        <div class="research-meta">
+          <strong>CSUN · Collaborative Research</strong><br>
+          Advisor: Prof. Dr. Shahnam Mirzaei · With: G. Fajardo, L. Aguilar-Larios
+        </div>
+      </div>
+
+      <div class="research-card">
+        <div class="research-card-tag">Completed · 2020–2021</div>
+        <h3>Electromagnetic Analysis of Electrical Machines</h3>
+        <p>Conducted FEM-based electromagnetic analysis of non-oriented electrical steel core materials. Evaluated motor efficiency, core losses, and magnetic characteristics under varying loads.</p>
+        <div class="research-meta">
+          <strong>SMART Lab, Kyungsung University</strong><br>
+          Supervisor: Prof. Dr. Sunkara Srinivasa Rao
+        </div>
+      </div>
+
+      <div class="research-card">
+        <div class="research-card-tag">M.S. Thesis · 2025</div>
+        <h3>Image-Based Control of Humanoid Robots via Deep Neural Networks</h3>
+        <p>End-to-end pipeline mapping raw visual input to joint control signals. Investigated robustness, latency, and real-time performance of neural controllers on humanoid platforms.</p>
+        <div class="research-meta">
+          <strong>CSUN · MOSAIC Lab</strong><br>
+          Implemented in PyTorch · Validated in CoppeliaSim
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label">Featured Work</div>
+    <div class="section-title">Technical Projects</div>
+    <div class="projects-list">
+
+      <a href="https://github.com/jaiswalnabin/humanoid-robot-control" target="_blank" class="project-row">
+        <div class="project-num">01</div>
+        <div class="project-info">
+          <h3>Image-Based Humanoid Robot Control</h3>
+          <p>End-to-end deep learning pipeline: raw image → CNN feature extraction → joint-level control signals. Benchmarked against classical PD controllers on stability and task completion in CoppeliaSim.</p>
+          <div class="tags">
+            <span class="tag">PyTorch</span>
+            <span class="tag">CNN</span>
+            <span class="tag">CoppeliaSim</span>
+            <span class="tag">Python</span>
+            <span class="tag">Deep Learning</span>
+            <span class="tag">Robotics</span>
+          </div>
+        </div>
+        <div class="project-arrow">↗</div>
+      </a>
+
+      <a href="https://github.com/jaiswalnabin/autonomous-navigation-slam" target="_blank" class="project-row">
+        <div class="project-num">02</div>
+        <div class="project-info">
+          <h3>Autonomous Navigation & SLAM</h3>
+          <p>LiDAR-based 2D mapping and autonomous navigation on TI-RSLK chassis. Implements and compares EKF-SLAM and GraphSLAM for localization accuracy in indoor environments.</p>
+          <div class="tags">
+            <span class="tag">ROS2</span>
+            <span class="tag">EKF-SLAM</span>
+            <span class="tag">GraphSLAM</span>
+            <span class="tag">LiDAR</span>
+            <span class="tag">C++</span>
+            <span class="tag">Python</span>
+          </div>
+        </div>
+        <div class="project-arrow">↗</div>
+      </a>
+
+      <a href="https://github.com/jaiswalnabin/traffic-light-vhdl" target="_blank" class="project-row">
+        <div class="project-num">03</div>
+        <div class="project-info">
+          <h3>Adaptive Traffic Light Controller (FPGA)</h3>
+          <p>Sensor-driven adaptive traffic control system implemented in VHDL on Xilinx FPGA/Zedboard. Adaptive timing algorithms respond to real-time sensor inputs.</p>
+          <div class="tags">
+            <span class="tag">VHDL</span>
+            <span class="tag">Xilinx FPGA</span>
+            <span class="tag">Vivado</span>
+            <span class="tag">Embedded Systems</span>
+          </div>
+        </div>
+        <div class="project-arrow">↗</div>
+      </a>
+
+      <a href="https://github.com/jaiswalnabin/smart-energy-monitor" target="_blank" class="project-row">
+        <div class="project-num">04</div>
+        <div class="project-info">
+          <h3>ARM Cortex-M3 Smart Energy Monitor</h3>
+          <p>Full product lifecycle: ARM Cortex-M3 firmware for energy monitoring with pOLED display, GSM communication, tamper detection, and secure data logging. Mass production deployed.</p>
+          <div class="tags">
+            <span class="tag">ARM Cortex-M3</span>
+            <span class="tag">Embedded C</span>
+            <span class="tag">GSM</span>
+            <span class="tag">Firmware</span>
+            <span class="tag">Hardware Integration</span>
+          </div>
+        </div>
+        <div class="project-arrow">↗</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label">Technical Expertise</div>
+    <div class="section-title">Skills & Tools</div>
+    <div class="skills-grid">
+
+      <div class="skill-block">
+        <div class="skill-block-title">Robotics & Autonomy</div>
+        <div class="skill-item"><span class="skill-dot"></span>ROS / ROS2</div>
+        <div class="skill-item"><span class="skill-dot"></span>SLAM (EKF, GraphSLAM)</div>
+        <div class="skill-item"><span class="skill-dot"></span>LiDAR · Sensor Fusion</div>
+        <div class="skill-item"><span class="skill-dot"></span>Motion Planning</div>
+        <div class="skill-item"><span class="skill-dot"></span>CoppeliaSim</div>
+        <div class="skill-item"><span class="skill-dot"></span>Obstacle Avoidance</div>
+      </div>
+
+      <div class="skill-block">
+        <div class="skill-block-title">AI & Machine Learning</div>
+        <div class="skill-item"><span class="skill-dot"></span>PyTorch</div>
+        <div class="skill-item"><span class="skill-dot"></span>Deep Neural Networks</div>
+        <div class="skill-item"><span class="skill-dot"></span>CNNs · Image-Based Control</div>
+        <div class="skill-item"><span class="skill-dot"></span>On-Device Inference</div>
+        <div class="skill-item"><span class="skill-dot"></span>MATLAB</div>
+        <div class="skill-item"><span class="skill-dot"></span>Data Preprocessing</div>
+      </div>
+
+      <div class="skill-block">
+        <div class="skill-block-title">Embedded Systems</div>
+        <div class="skill-item"><span class="skill-dot"></span>ARM Cortex-M/A · STM32</div>
+        <div class="skill-item"><span class="skill-dot"></span>Xilinx FPGA · Zedboard</div>
+        <div class="skill-item"><span class="skill-dot"></span>Raspberry Pi · ESP32</div>
+        <div class="skill-item"><span class="skill-dot"></span>RTOS · Firmware Design</div>
+        <div class="skill-item"><span class="skill-dot"></span>VHDL · Verilog</div>
+        <div class="skill-item"><span class="skill-dot"></span>SPI · I2C · UART · CAN</div>
+      </div>
+
+      <div class="skill-block">
+        <div class="skill-block-title">Languages</div>
+        <div class="skill-item"><span class="skill-dot"></span>C / C++</div>
+        <div class="skill-item"><span class="skill-dot"></span>Python</div>
+        <div class="skill-item"><span class="skill-dot"></span>Embedded C</div>
+        <div class="skill-item"><span class="skill-dot"></span>VHDL · Verilog</div>
+        <div class="skill-item"><span class="skill-dot"></span>MATLAB</div>
+      </div>
+
+      <div class="skill-block">
+        <div class="skill-block-title">Tools & Platforms</div>
+        <div class="skill-item"><span class="skill-dot"></span>Git · GitHub</div>
+        <div class="skill-item"><span class="skill-dot"></span>Vivado · Proteus</div>
+        <div class="skill-item"><span class="skill-dot"></span>VS Code · MobaXterm</div>
+        <div class="skill-item"><span class="skill-dot"></span>CAD · CATIA · Creo</div>
+        <div class="skill-item"><span class="skill-dot"></span>RViz2</div>
+      </div>
+
+      <div class="skill-block">
+        <div class="skill-block-title">Human Languages</div>
+        <div class="skill-item"><span class="skill-dot"></span>English — Fluent</div>
+        <div class="skill-item"><span class="skill-dot"></span>Nepali — Native</div>
+        <div class="skill-item"><span class="skill-dot"></span>Korean — Fluent</div>
+        <div class="skill-item"><span class="skill-dot"></span>Spanish — Basic</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="contact-text">
+        <h2>Open to PhD Opportunities</h2>
+        <p>I'm actively seeking PhD positions in robotics, autonomous systems, and embedded AI. If you're working on problems at the intersection of perception, control, and physical systems — I'd love to connect.</p>
+        <p>Available for research collaborations, lab visits, and PhD program discussions.</p>
+      </div>
+      <div class="contact-details">
+        <a href="mailto:deep@gmail.com" class="contact-item">
+          <div class="contact-icon">✉</div>
+          <div class="contact-item-text">
+            <span class="contact-item-label">Email</span>
+            <span class="contact-item-val">deep@gmail.com</span>
+          </div>
+        </a>
+        <a href="https://github.com/jaiswalnabin" target="_blank" class="contact-item">
+          <div class="contact-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          </div>
+          <div class="contact-item-text">
+            <span class="contact-item-label">GitHub</span>
+            <span class="contact-item-val">github.com/jaiswalnabin</span>
+          </div>
+        </a>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div class="contact-item-text">
+            <span class="contact-item-label">Location</span>
+            <span class="contact-item-val">Los Angeles, CA 91324</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Deep K · Robotics & Autonomous Systems · Los Angeles, CA · github.com/jaiswalnabin
+</footer>
+
+</body>
+</html>
