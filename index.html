@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Deep K — Robotics & Autonomous Systems</title>
+<title>Nabin Jaiswal — Robotics & Autonomous Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -26,7 +28,7 @@
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Outfit', Arial, sans-serif;
     background: var(--cream);
     color: var(--text);
     overflow-x: hidden;
@@ -43,7 +45,7 @@
     height: 60px;
   }
   .nav-logo {
-    font-family: 'EB Garamond', serif;
+    font-family: 'EB Garamond', Georgia, serif;
     font-size: 1.2rem; font-weight: 500;
     color: var(--navy); letter-spacing: 0.02em;
   }
@@ -83,19 +85,19 @@
     border-radius: 50%;
   }
   .hero-tag {
-    font-family: 'DM Mono', monospace;
+    font-family: 'DM Mono', 'Courier New', monospace;
     font-size: 0.72rem; font-weight: 300; letter-spacing: 0.15em;
     color: var(--gold); text-transform: uppercase;
     margin-bottom: 1.5rem;
-    opacity: 0; animation: fadeUp 0.6s 0.2s forwards;
+    animation: fadeUp 0.6s 0.2s both;
   }
   .hero-name {
-    font-family: 'EB Garamond', serif;
+    font-family: 'EB Garamond', Georgia, serif;
     font-size: clamp(3rem, 5vw, 4.5rem);
     font-weight: 500; line-height: 1.05;
     color: var(--white);
     margin-bottom: 1.5rem;
-    opacity: 0; animation: fadeUp 0.6s 0.35s forwards;
+    animation: fadeUp 0.6s 0.35s both;
   }
   .hero-name em { color: var(--gold-light); font-style: italic; }
   .hero-desc {
@@ -103,11 +105,11 @@
     color: rgba(255,255,255,0.7);
     max-width: 420px;
     margin-bottom: 2.5rem;
-    opacity: 0; animation: fadeUp 0.6s 0.5s forwards;
+    animation: fadeUp 0.6s 0.5s both;
   }
   .hero-links {
     display: flex; gap: 1rem; flex-wrap: wrap;
-    opacity: 0; animation: fadeUp 0.6s 0.65s forwards;
+    animation: fadeUp 0.6s 0.65s both;
   }
   .btn-primary {
     display: inline-flex; align-items: center; gap: 0.5rem;
@@ -135,14 +137,14 @@
     border-left: 1px solid var(--border);
   }
   .info-label {
-    font-family: 'DM Mono', monospace;
+    font-family: 'DM Mono', 'Courier New', monospace;
     font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--text-light); margin-bottom: 2rem;
   }
   .info-block { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
   .info-block:last-child { border-bottom: none; margin-bottom: 0; }
   .info-title {
-    font-family: 'EB Garamond', serif;
+    font-family: 'EB Garamond', Georgia, serif;
     font-size: 1.15rem; font-weight: 500;
     color: var(--navy); margin-bottom: 0.3rem;
   }
@@ -150,7 +152,7 @@
   .info-sub span {
     display: inline-block;
     background: var(--navy); color: var(--gold-light);
-    font-family: 'DM Mono', monospace;
+    font-family: 'DM Mono', 'Courier New', monospace;
     font-size: 0.7rem; padding: 2px 8px; border-radius: 2px;
     margin-top: 0.4rem;
   }
@@ -160,12 +162,12 @@
   .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
 
   .section-label {
-    font-family: 'DM Mono', monospace;
+    font-family: 'DM Mono', 'Courier New', monospace;
     font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--gold); margin-bottom: 0.6rem;
   }
   .section-title {
-    font-family: 'EB Garamond', serif;
+    font-family: 'EB Garamond', Georgia, serif;
     font-size: clamp(1.8rem, 3vw, 2.6rem);
     font-weight: 500; color: var(--navy);
     margin-bottom: 3rem; line-height: 1.2;
@@ -181,12 +183,12 @@
   }
   .research-card:hover { background: #faf8f5; }
   .research-card-tag {
-    font-family: 'DM Mono', monospace;
+    font-family: 'DM Mono', 'Courier New', monospace;
     font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--gold); margin-bottom: 0.8rem;
   }
   .research-card h3 {
-    font-family: 'EB Garamond', serif;
+    font-family: 'EB Garamond', Georgia, serif;
     font-size: 1.25rem; font-weight: 500; color: var(--navy);
     margin-bottom: 0.6rem; line-height: 1.3;
   }
@@ -207,7 +209,7 @@
   }
   .project-row:hover { background: var(--cream-dark); }
   .project-num {
-    font-family: 'EB Garamond', serif;
+    font-family: 'EB Garamond', Georgia, serif;
     font-size: 2.5rem; font-weight: 400;
     color: var(--cream-dark); line-height: 1;
     align-self: center;
@@ -215,14 +217,14 @@
   }
   .project-row:hover .project-num { color: var(--gold-light); filter: none; }
   .project-info h3 {
-    font-family: 'EB Garamond', serif;
+    font-family: 'EB Garamond', Georgia, serif;
     font-size: 1.3rem; font-weight: 500; color: var(--navy);
     margin-bottom: 0.4rem;
   }
   .project-info p { font-size: 0.87rem; color: var(--text-mid); line-height: 1.65; margin-bottom: 0.8rem; }
   .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
   .tag {
-    font-family: 'DM Mono', monospace;
+    font-family: 'DM Mono', 'Courier New', monospace;
     font-size: 0.65rem; padding: 3px 8px;
     border: 1px solid var(--border);
     color: var(--text-mid); border-radius: 2px;
@@ -244,7 +246,7 @@
     background: var(--navy);
   }
   .skill-block-title {
-    font-family: 'DM Mono', monospace;
+    font-family: 'DM Mono', 'Courier New', monospace;
     font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--gold); margin-bottom: 1rem;
   }
@@ -263,7 +265,7 @@
     display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
   }
   .contact-text h2 {
-    font-family: 'EB Garamond', serif;
+    font-family: 'EB Garamond', Georgia, serif;
     font-size: 2rem; font-weight: 500; color: var(--navy);
     margin-bottom: 1rem;
   }
@@ -295,12 +297,58 @@
     background: var(--navy);
     padding: 2rem;
     text-align: center;
-    font-family: 'DM Mono', monospace;
+    font-family: 'DM Mono', 'Courier New', monospace;
     font-size: 0.72rem; color: rgba(255,255,255,0.35);
     letter-spacing: 0.08em;
   }
 
-  /* EDUCATION */
+  /* EXPERIENCE */
+  #experience { background: var(--white); }
+  .exp-timeline { position: relative; padding-left: 2rem; }
+  .exp-timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 8px; bottom: 8px;
+    width: 1px; background: var(--border);
+  }
+  .exp-item {
+    position: relative;
+    padding: 0 0 3rem 2.5rem;
+  }
+  .exp-item:last-child { padding-bottom: 0; }
+  .exp-item::before {
+    content: '';
+    position: absolute; left: -2rem; top: 8px;
+    width: 10px; height: 10px;
+    background: var(--white); border: 2px solid var(--gold);
+    border-radius: 50%;
+    transform: translateX(-4px);
+  }
+  .exp-period {
+    font-family: 'DM Mono', 'Courier New', monospace;
+    font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.5rem;
+  }
+  .exp-role {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.3rem; font-weight: 500; color: var(--navy);
+    margin-bottom: 0.15rem;
+  }
+  .exp-company {
+    font-size: 0.87rem; color: var(--text-mid);
+    margin-bottom: 1rem;
+  }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .exp-bullets li {
+    font-size: 0.88rem; color: var(--text-mid); line-height: 1.65;
+    padding-left: 1rem; position: relative;
+  }
+  .exp-bullets li::before {
+    content: ''; position: absolute; left: 0; top: 0.6em;
+    width: 4px; height: 4px; background: var(--gold); border-radius: 50%;
+  }
+  .exp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+
+
   #education { background: var(--cream-dark); }
   .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
   .edu-card {
@@ -314,21 +362,21 @@
     padding: 1.75rem 2rem;
   }
   .edu-degree {
-    font-family: 'EB Garamond', serif;
+    font-family: 'EB Garamond', Georgia, serif;
     font-size: 1.25rem; font-weight: 500;
     color: var(--white); margin-bottom: 0.3rem;
   }
   .edu-school { font-size: 0.85rem; color: rgba(255,255,255,0.65); margin-bottom: 0.5rem; }
   .edu-meta { display: flex; gap: 1rem; flex-wrap: wrap; }
   .edu-badge {
-    font-family: 'DM Mono', monospace;
+    font-family: 'DM Mono', 'Courier New', monospace;
     font-size: 0.65rem; letter-spacing: 0.1em;
     background: rgba(201,150,58,0.2); color: var(--gold-light);
     padding: 3px 10px; border-radius: 2px;
   }
   .edu-card-body { padding: 1.75rem 2rem; }
   .edu-coursework-label {
-    font-family: 'DM Mono', monospace;
+    font-family: 'DM Mono', 'Courier New', monospace;
     font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--text-light); margin-bottom: 1rem;
   }
@@ -369,6 +417,7 @@
     <li><a href="#research">Research</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#education">Education</a></li>
+    <li><a href="#experience">Experience</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -689,6 +738,52 @@
   </div>
 </section>
 
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">Industry</div>
+    <div class="section-title">Work Experience</div>
+    <div class="exp-timeline">
+
+      <div class="exp-item">
+        <div class="exp-period">May 2022 – April 2023</div>
+        <div class="exp-role">Research Engineer</div>
+        <div class="exp-company">Dong Yang Industrial Co., Ltd – TRTS · Gumi, South Korea</div>
+        <ul class="exp-bullets">
+          <li>Developed an ARM Cortex-M3 based Smart Energy Monitoring System featuring pOLED display, GSM communication, tamper detection, and secure data logging.</li>
+          <li>Contributed to full end-to-end product development including firmware architecture, hardware integration, mechanical validation, quality analysis, and mass production support.</li>
+          <li>Designed and implemented real-time firmware in Embedded C for sensor data acquisition, processing, and wireless transmission.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="tag">ARM Cortex-M3</span>
+          <span class="tag">Embedded C</span>
+          <span class="tag">Firmware</span>
+          <span class="tag">GSM</span>
+          <span class="tag">Hardware Integration</span>
+          <span class="tag">Mass Production</span>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-period">Nov 2021 – Jan 2022</div>
+        <div class="exp-role">Engineering Intern</div>
+        <div class="exp-company">Komatec · Busan, South Korea</div>
+        <ul class="exp-bullets">
+          <li>Assisted in system design, integration testing, and troubleshooting of mechatronic systems.</li>
+          <li>Supported engineering projects and gained hands-on experience with industrial hardware and control systems.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="tag">Mechatronics</span>
+          <span class="tag">System Design</span>
+          <span class="tag">Testing</span>
+          <span class="tag">Troubleshooting</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact">
   <div class="container">
@@ -703,7 +798,7 @@
           <div class="contact-icon">✉</div>
           <div class="contact-item-text">
             <span class="contact-item-label">Email</span>
-            <span class="contact-item-val">deep@gmail.com</span>
+            <span class="contact-item-val">nabin.jaiswal.633@gmail.com</span>
           </div>
         </a>
         <a href="https://github.com/jaiswalnabin" target="_blank" class="contact-item">
