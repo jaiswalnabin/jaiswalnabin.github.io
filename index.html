@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nabin Jaiswal — Robotics & Autonomous Systems</title>
+<title>Deep K — Robotics & Autonomous Systems</title>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -300,7 +300,53 @@
     letter-spacing: 0.08em;
   }
 
-  @keyframes fadeUp {
+  /* EDUCATION */
+  #education { background: var(--cream-dark); }
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .edu-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .edu-card-header {
+    background: var(--navy);
+    padding: 1.75rem 2rem;
+  }
+  .edu-degree {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.25rem; font-weight: 500;
+    color: var(--white); margin-bottom: 0.3rem;
+  }
+  .edu-school { font-size: 0.85rem; color: rgba(255,255,255,0.65); margin-bottom: 0.5rem; }
+  .edu-meta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .edu-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.1em;
+    background: rgba(201,150,58,0.2); color: var(--gold-light);
+    padding: 3px 10px; border-radius: 2px;
+  }
+  .edu-card-body { padding: 1.75rem 2rem; }
+  .edu-coursework-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-light); margin-bottom: 1rem;
+  }
+  .course-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .course-tag {
+    font-size: 0.75rem; padding: 4px 10px;
+    border: 1px solid var(--border);
+    color: var(--text-mid); border-radius: 2px;
+    background: var(--cream);
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .course-tag:hover { background: var(--navy); color: var(--gold-light); border-color: var(--navy); }
+
+  @media (max-width: 900px) {
+    .edu-grid { grid-template-columns: 1fr; }
+  }
+
+
     from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: translateY(0); }
   }
@@ -322,6 +368,7 @@
   <ul class="nav-links">
     <li><a href="#research">Research</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -504,6 +551,77 @@
   </div>
 </section>
 
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="section-label">Academic Background</div>
+    <div class="section-title">Education</div>
+    <div class="edu-grid">
+
+      <div class="edu-card">
+        <div class="edu-card-header">
+          <div class="edu-degree">M.S. Computer Engineering</div>
+          <div class="edu-school">California State University, Northridge</div>
+          <div class="edu-meta">
+            <span class="edu-badge">GPA 3.6 / 4.0</span>
+            <span class="edu-badge">2025</span>
+          </div>
+        </div>
+        <div class="edu-card-body">
+          <div class="edu-coursework-label">Relevant Coursework</div>
+          <div class="course-tags">
+            <span class="course-tag">Embedded Systems</span>
+            <span class="course-tag">SOC Design</span>
+            <span class="course-tag">ASIC Design</span>
+            <span class="course-tag">Analog & Digital Circuit Design</span>
+            <span class="course-tag">Data Mining</span>
+            <span class="course-tag">Computer System & Architecture</span>
+            <span class="course-tag">Software Validation & Verification</span>
+            <span class="course-tag">Digital System Design</span>
+            <span class="course-tag">Computer Arithmetic Design</span>
+            <span class="course-tag">Software Architecture & Design</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-card-header">
+          <div class="edu-degree">B.S. Mechatronics Engineering</div>
+          <div class="edu-school">Kyungsung University, Busan, South Korea</div>
+          <div class="edu-meta">
+            <span class="edu-badge">GPA 3.5 / 4.0</span>
+            <span class="edu-badge">2022</span>
+          </div>
+        </div>
+        <div class="edu-card-body">
+          <div class="edu-coursework-label">Relevant Coursework</div>
+          <div class="course-tags">
+            <span class="course-tag">Intelligent Robotics</span>
+            <span class="course-tag">Control Engineering</span>
+            <span class="course-tag">Dynamic Systems & Controls</span>
+            <span class="course-tag">AI Programming</span>
+            <span class="course-tag">Smart Sensor & Measurement</span>
+            <span class="course-tag">Electrical Circuits</span>
+            <span class="course-tag">CAD & FEA Analysis</span>
+            <span class="course-tag">MATLAB</span>
+            <span class="course-tag">CATIA</span>
+            <span class="course-tag">PTC Creo</span>
+            <span class="course-tag">Solid Mechanics</span>
+            <span class="course-tag">Fluid Mechanics</span>
+            <span class="course-tag">Thermodynamics</span>
+            <span class="course-tag">Material Science</span>
+            <span class="course-tag">Mechanisms</span>
+            <span class="course-tag">Manufacturing Processes</span>
+            <span class="course-tag">Mechanical Engineering Design</span>
+            <span class="course-tag">Statics</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- SKILLS -->
 <section id="skills">
   <div class="container">
@@ -585,7 +703,7 @@
           <div class="contact-icon">✉</div>
           <div class="contact-item-text">
             <span class="contact-item-label">Email</span>
-            <span class="contact-item-val">nabin.jaiswal.633@gmail.com</span>
+            <span class="contact-item-val">deep@gmail.com</span>
           </div>
         </a>
         <a href="https://github.com/jaiswalnabin" target="_blank" class="contact-item">
@@ -610,7 +728,7 @@
 </section>
 
 <footer>
-  Nabin Jaiswal · Robotics & Autonomous Systems · Los Angeles, CA · github.com/jaiswalnabin
+  Deep K · Robotics & Autonomous Systems · Los Angeles, CA · github.com/jaiswalnabin
 </footer>
 
 </body>
