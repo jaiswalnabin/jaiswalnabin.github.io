@@ -53,9 +53,11 @@
   .nav-links a {
     font-size: 0.82rem; font-weight: 400; letter-spacing: 0.08em;
     text-transform: uppercase; color: var(--text-mid);
-    text-decoration: none; transition: color 0.2s;
+    text-decoration: none; transition: all 0.2s;
+    padding: 8px 12px; border-radius: 2px;
   }
   .nav-links a:hover { color: var(--navy); }
+  .nav-links a.active { background: var(--navy); color: var(--gold); }
 
   /* HERO */
   .hero {
@@ -828,6 +830,32 @@
   Nabin Jaiswal · Robotics & Autonomous Systems · Los Angeles, CA · github.com/jaiswalnabin
   <div class="copyright">© 2026 Nabin Jaiswal. All rights reserved.</div>
 </footer>
+
+<script>
+  // Highlight active nav link based on scroll position
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sections = document.querySelectorAll('section[id]');
+
+  const observerOptions = {
+    threshold: 0.3,
+    rootMargin: '-50px 0px -66% 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + entry.target.id) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach(section => observer.observe(section));
+</script>
 
 </body>
 </html>
