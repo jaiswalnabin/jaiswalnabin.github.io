@@ -368,6 +368,8 @@
     color: var(--white); margin-bottom: 0.3rem;
   }
   .edu-school { font-size: 0.85rem; color: rgba(255,255,255,0.65); margin-bottom: 0.5rem; }
+  .edu-school-with-logo { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; gap: 1rem; }
+  .edu-logo { width: 40px; height: 40px; object-fit: contain; }
   .edu-meta { display: flex; gap: 1rem; flex-wrap: wrap; }
   .edu-badge {
     font-family: 'DM Mono', 'Courier New', monospace;
@@ -611,7 +613,10 @@
       <div class="edu-card">
         <div class="edu-card-header">
           <div class="edu-degree">M.S. Computer Engineering</div>
-          <div class="edu-school">California State University, Northridge</div>
+          <div class="edu-school-with-logo">
+            <div class="edu-school">California State University, Northridge</div>
+            <img src="CSUNS.svg" alt="CSUN Logo" class="edu-logo">
+          </div>
           <div class="edu-meta">
             <span class="edu-badge">GPA 3.6 / 4.0</span>
             <span class="edu-badge">2025</span>
@@ -637,7 +642,10 @@
       <div class="edu-card">
         <div class="edu-card-header">
           <div class="edu-degree">B.S. Mechatronics Engineering</div>
-          <div class="edu-school">Kyungsung University, Busan, South Korea</div>
+          <div class="edu-school-with-logo">
+            <div class="edu-school">Kyungsung University, Busan, South Korea</div>
+            <img src="Logo_of_Kyungsung_University.jpg" alt="Kyungsung University Logo" class="edu-logo">
+          </div>
           <div class="edu-meta">
             <span class="edu-badge">GPA 3.5 / 4.0</span>
             <span class="edu-badge">2022</span>
